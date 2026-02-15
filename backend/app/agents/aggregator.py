@@ -19,6 +19,5 @@ aggregator_agent = Agent(
         "3. Resolve any contradictions (e.g., strong fundamentals but weak technicals).",
         "4. Be professional, clear, and action-oriented.",
     ],
-    show_tool_calls=False,
     markdown=True,
 )

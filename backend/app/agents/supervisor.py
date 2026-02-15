@@ -14,7 +14,7 @@ class FinancialSupervisor:
         return Agent(
             name="Supervisor",
             model=self.model,
-            team=[
+            tools=[
                 fundamental_analyst,
                 technical_analyst,
                 sentiment_analyst,
