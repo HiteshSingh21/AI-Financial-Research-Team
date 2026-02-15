@@ -1,0 +1,45 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+sqlmodel
+python-dotenv
+pydantic-settings
+python-multipart
+
+# ── LLM ──
+google-generativeai
+
+# ── Finance ──
+yfinance
+pandas
+numpy
+ta
+
+# ── Search ──
+duckduckgo-search
+tavily-python
+requests
+beautifulsoup4
+
+# ── RAG ──
+faiss-cpu
+langchain
+langchain-text-splitters
+PyPDF2
+
+# ── Async ──
+httpx
+aiofiles
+
+fastapi
+uvicorn
+agno
+google-generativeai
+python-dotenv
+sqlalchemy
+psycopg2-binary
+pandas
+yfinance
+faiss-cpu
+sentence-transformers
+tavily-python

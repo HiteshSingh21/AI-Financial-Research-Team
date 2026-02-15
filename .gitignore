@@ -1,0 +1,43 @@
+# General
+.DS_Store
+*.log
+*.sqlite
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.env
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Node/Frontend
+node_modules/
+dist/
+.next/
+out/
+build/
+.pnp
+.pnp.js
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
+
+# Specifc to this project
+data/raw_pdfs/*
+!data/raw_pdfs/.keep
+data/faiss_index/*
+!data/faiss_index/.keep
+verify_agents.py
+backend/financial_analyst.db
