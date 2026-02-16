@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    @apply bg-background text-slate-text font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-slate-heading font-semibold;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-surface/80 backdrop-blur-[16px] border border-border;
+  }
+
+  .glass-hover {
+    @apply glass hover:bg-surface-hover hover:border-border-light transition-all duration-200;
+  }
+
+  .glow-border {
+    @apply border border-mint/20 shadow-glow;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-mint to-mint-light bg-clip-text text-transparent;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #1E2433 transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #1E2433;
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: #2A3040;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Markdown content styling */
+.markdown-content h1 { @apply text-2xl font-bold text-slate-heading mt-6 mb-3; }
+.markdown-content h2 { @apply text-xl font-semibold text-slate-heading mt-5 mb-2; }
+.markdown-content h3 { @apply text-lg font-semibold text-slate-heading mt-4 mb-2; }
+.markdown-content p { @apply text-slate-text leading-relaxed mb-3; }
+.markdown-content ul { @apply list-disc list-inside mb-3 space-y-1; }
+.markdown-content ol { @apply list-decimal list-inside mb-3 space-y-1; }
+.markdown-content li { @apply text-slate-text; }
+.markdown-content strong { @apply text-slate-heading font-semibold; }
+.markdown-content em { @apply italic text-slate-text; }
+.markdown-content blockquote {
+  @apply border-l-2 border-mint/40 pl-4 my-3 italic text-slate-muted;
+}
+.markdown-content a { @apply text-mint hover:text-mint-light underline; }
+.markdown-content table {
+  @apply w-full border-collapse my-4;
+}
+.markdown-content th {
+  @apply text-left px-3 py-2 bg-surface-light text-slate-heading text-sm font-semibold border border-border;
+}
+.markdown-content td {
+  @apply px-3 py-2 text-sm border border-border;
+}
+.markdown-content hr { @apply border-border my-4; }
