@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 from app.api.v1.endpoints import router as api_router
 from app.core.config import settings
 from app.db.session import init_db
@@ -7,7 +8,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = FastAPI(title=settings.PROJECT_NAME)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Modern lifespan handler — replaces deprecated @app.on_event."""
+    init_db()
+    yield
+
+
+app = FastAPI(title=settings.PROJECT_NAME, lifespan=lifespan)
 
 # CORS — Allow all for dev
 app.add_middleware(
@@ -17,10 +26,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.on_event("startup")
-def on_startup():
-    init_db()
 
 @app.get("/health")
 def health_check():

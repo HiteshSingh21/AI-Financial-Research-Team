@@ -10,12 +10,9 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "Financial AI Analyst"
 
     # ── Database ──
-    # Use absolute path for SQLite to avoid issues with CWD
-    _db_path = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-        "financial_analyst.db"
-    )
-    DATABASE_URL: str = f"sqlite:///{_db_path}"
+    # Defaults to local SQLite for development.
+    # In Docker, set DATABASE_URL=postgresql://user:pass@db:5432/financial_ai
+    DATABASE_URL: str = "sqlite:///./financial_analyst.db"
 
     # ── LLM Keys ──
     GEMINI_API_KEY: str = ""
