@@ -9,6 +9,7 @@ python-multipart
 
 # ── LLM ──
 google-generativeai
+google-genai
 agno
 
 # ── Finance ──
