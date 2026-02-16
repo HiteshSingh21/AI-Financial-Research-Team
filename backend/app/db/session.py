@@ -1,10 +1,6 @@
-"""
-Database Session Management.
-"""
 from sqlmodel import create_engine, SQLModel, Session
 from app.core.config import settings
 
-# SQLite requires check_same_thread=False; Postgres does not support it
 connect_args = {}
 if settings.DATABASE_URL.startswith("sqlite"):
     connect_args["check_same_thread"] = False

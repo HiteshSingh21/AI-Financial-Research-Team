@@ -51,7 +51,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="flex-1 overflow-y-auto scrollbar-thin p-6 max-w-2xl mx-auto w-full space-y-6">
-                {/* --- Error State --- */}
+
                 {error && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                         <Card className="border-danger/30">
@@ -70,7 +70,7 @@ export default function SettingsPage() {
                     </motion.div>
                 )}
 
-                {/* --- System Overview --- */}
+
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <Card>
                         <CardHeader>
@@ -129,7 +129,7 @@ export default function SettingsPage() {
                     </Card>
                 </motion.div>
 
-                {/* --- AI Agents --- */}
+
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -175,7 +175,7 @@ export default function SettingsPage() {
                     </Card>
                 </motion.div>
 
-                {/* --- Infrastructure --- */}
+
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -236,7 +236,7 @@ export default function SettingsPage() {
                     </Card>
                 </motion.div>
 
-                {/* --- API Keys --- */}
+
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

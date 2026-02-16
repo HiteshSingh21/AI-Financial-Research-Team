@@ -1,7 +1,3 @@
-"""
-Search Tool Service — Web search for latest news and headlines.
-Supports DuckDuckGo (free, no key) and Tavily (optional, better quality).
-"""
 from duckduckgo_search import DDGS
 from app.core.logging import get_logger
 from app.core.config import settings
@@ -10,20 +6,13 @@ log = get_logger(__name__)
 
 
 class SearchToolService:
-    """Searches the web for real-time news about a stock or financial topic."""
 
     def search_news(self, query: str, max_results: int = 8) -> list[dict]:
-        """
-        Search for recent news articles.
-        Tries Tavily first (if API key available), falls back to DuckDuckGo.
-        Returns list of {title, url, snippet, source}.
-        """
         if settings.TAVILY_API_KEY:
             return self._search_tavily(query, max_results)
         return self._search_duckduckgo(query, max_results)
 
     def _search_tavily(self, query: str, max_results: int) -> list[dict]:
-        """Search using Tavily API (higher quality, requires key)."""
         log.info(f"Searching Tavily for: {query}")
         try:
             from tavily import TavilyClient
@@ -49,7 +38,6 @@ class SearchToolService:
             return self._search_duckduckgo(query, max_results)
 
     def _search_duckduckgo(self, query: str, max_results: int) -> list[dict]:
-        """Search using DuckDuckGo (free, no API key needed)."""
         log.info(f"Searching DuckDuckGo for: {query}")
         try:
             results = []
@@ -69,5 +57,4 @@ class SearchToolService:
             return [{"error": str(e)}]
 
 
-# Singleton instance
 search_tool_service = SearchToolService()

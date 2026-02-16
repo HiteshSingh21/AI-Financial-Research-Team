@@ -1,14 +1,9 @@
-"""
-The Librarian Agent — Fundamental Analyst.
-Uses Agno framework to wrap RAG Service.
-"""
 from agno.agent import Agent
 from agno.models.google import Gemini
 from app.core.config import settings
 from app.services.rag_service import rag_service
 
 def search_documents(query: str, top_k: int = 5) -> list[dict]:
-    """Search internal documents (PDFs) for relevant information."""
     return rag_service.query(query, top_k)
 
 fundamental_analyst = Agent(

@@ -28,7 +28,7 @@ function NavContent() {
 
     return (
         <div className="flex flex-col h-full">
-            {/* Logo */}
+
             <div className="p-5 pb-4">
                 <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-mint to-mint-dark flex items-center justify-center shadow-glow">
@@ -47,7 +47,7 @@ function NavContent() {
 
             <Separator />
 
-            {/* Navigation */}
+
             <nav className="flex-1 p-3 space-y-1">
                 {navItems.map((item) => {
                     const isActive = pathname === item.href;
@@ -71,7 +71,7 @@ function NavContent() {
 
             <Separator />
 
-            {/* Bottom section */}
+
             <div className="p-3 space-y-2">
                 <Link
                     href="/settings"
@@ -99,12 +99,12 @@ function NavContent() {
 export function Sidebar() {
     return (
         <>
-            {/* Desktop sidebar */}
+
             <aside className="hidden lg:flex w-[260px] h-screen flex-col fixed left-0 top-0 z-40 glass border-r border-border">
                 <NavContent />
             </aside>
 
-            {/* Mobile hamburger */}
+
             <div className="lg:hidden fixed top-0 left-0 right-0 z-50 h-14 glass border-b border-border flex items-center px-4">
                 <Sheet>
                     <SheetTrigger asChild>

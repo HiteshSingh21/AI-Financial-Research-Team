@@ -1,7 +1,3 @@
-"""
-RAG Service — PDF ingestion + FAISS vector search.
-Uses Gemini embeddings and PyPDF2 for document processing.
-"""
 import os
 import pickle
 import numpy as np
@@ -12,11 +8,6 @@ log = get_logger(__name__)
 
 
 class RAGService:
-    """
-    Retrieval-Augmented Generation service.
-    Ingests PDFs → chunks → embeds with Gemini → stores in FAISS index.
-    Queries: embed question → search FAISS → return top-k chunks.
-    """
 
     def __init__(self):
         self.index = None
@@ -27,7 +18,6 @@ class RAGService:
         self._load_index()
 
     def _get_embedding(self, text: str) -> list[float]:
-        """Get embedding vector from Gemini."""
         import google.generativeai as genai
         genai.configure(api_key=settings.GEMINI_API_KEY)
         result = genai.embed_content(
@@ -38,7 +28,6 @@ class RAGService:
         return result["embedding"]
 
     def _get_query_embedding(self, text: str) -> list[float]:
-        """Get embedding vector optimized for queries."""
         import google.generativeai as genai
         genai.configure(api_key=settings.GEMINI_API_KEY)
         result = genai.embed_content(
@@ -49,7 +38,6 @@ class RAGService:
         return result["embedding"]
 
     def _load_index(self):
-        """Load existing FAISS index from disk if available."""
         if os.path.exists(self._index_path) and os.path.exists(self._chunks_path):
             try:
                 import faiss
@@ -65,7 +53,6 @@ class RAGService:
             log.info("No existing FAISS index found. Start by ingesting PDFs.")
 
     def _save_index(self):
-        """Persist FAISS index and chunks to disk."""
         import faiss
         os.makedirs(settings.FAISS_INDEX_DIR, exist_ok=True)
         faiss.write_index(self.index, self._index_path)
@@ -74,7 +61,6 @@ class RAGService:
         log.info(f"Saved FAISS index with {self.index.ntotal} vectors")
 
     def _chunk_text(self, text: str, chunk_size: int = 1000, overlap: int = 200) -> list[str]:
-        """Split text into overlapping chunks."""
         chunks = []
         start = 0
         while start < len(text):
@@ -86,9 +72,6 @@ class RAGService:
         return chunks
 
     def ingest_pdf(self, file_path: str) -> dict:
-        """
-        Ingest a PDF file: extract text → chunk → embed → add to FAISS.
-        """
         import faiss
         from PyPDF2 import PdfReader
 
@@ -104,11 +87,9 @@ class RAGService:
             if not full_text.strip():
                 return {"error": "No text extracted from PDF"}
 
-            # Chunk the text
             new_chunks = self._chunk_text(full_text)
             log.info(f"Created {len(new_chunks)} chunks from {len(reader.pages)} pages")
 
-            # Embed all chunks
             embeddings = []
             for i, chunk in enumerate(new_chunks):
                 emb = self._get_embedding(chunk)
@@ -118,14 +99,12 @@ class RAGService:
 
             embedding_matrix = np.array(embeddings, dtype="float32")
 
-            # Build / extend FAISS index
             if self.index is None:
                 dim = embedding_matrix.shape[1]
                 self.index = faiss.IndexFlatL2(dim)
 
             self.index.add(embedding_matrix)
 
-            # Store chunk text + metadata
             filename = os.path.basename(file_path)
             for chunk in new_chunks:
                 self.chunks.append(chunk)
@@ -145,10 +124,6 @@ class RAGService:
             return {"error": str(e)}
 
     def query(self, question: str, top_k: int = 5) -> list[dict]:
-        """
-        Search FAISS index for chunks most relevant to the question.
-        Returns list of {chunk, score, source}.
-        """
         if self.index is None or self.index.ntotal == 0:
             log.warning("No documents in FAISS index. Returning empty results.")
             return []
@@ -173,9 +148,7 @@ class RAGService:
 
     @property
     def is_ready(self) -> bool:
-        """Check if the index has any documents."""
         return self.index is not None and self.index.ntotal > 0
 
 
-# Singleton instance
 rag_service = RAGService()

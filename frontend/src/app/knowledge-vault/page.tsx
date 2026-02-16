@@ -126,7 +126,7 @@ export default function KnowledgeVault() {
 
     return (
         <div className="h-screen flex flex-col">
-            {/* Header */}
+
             <div className="h-14 border-b border-border flex items-center px-6 gap-3 shrink-0">
                 <div className="w-8 h-8 rounded-lg bg-mint/10 flex items-center justify-center">
                     <Database className="w-4 h-4 text-mint" />
@@ -145,13 +145,13 @@ export default function KnowledgeVault() {
 
             <ScrollArea className="flex-1">
                 <div className="p-6 max-w-4xl mx-auto space-y-6">
-                    {/* Upload Zone */}
+
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                         <div
                             {...getRootProps()}
                             className={`relative rounded-xl border-2 border-dashed p-10 text-center cursor-pointer transition-all duration-300 ${isDragActive
-                                    ? "border-mint bg-mint/5 shadow-glow-lg"
-                                    : "border-border hover:border-mint/30 hover:bg-surface-light/30"
+                                ? "border-mint bg-mint/5 shadow-glow-lg"
+                                : "border-border hover:border-mint/30 hover:bg-surface-light/30"
                                 }`}
                         >
                             <input {...getInputProps()} />
@@ -175,7 +175,7 @@ export default function KnowledgeVault() {
                         </div>
                     </motion.div>
 
-                    {/* Ingested Files Table */}
+
                     {files.length > 0 && (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                             <Card>
@@ -247,7 +247,7 @@ export default function KnowledgeVault() {
                         </motion.div>
                     )}
 
-                    {/* Empty state */}
+
                     {files.length === 0 && (
                         <Card className="border-dashed">
                             <CardContent className="py-10 text-center">

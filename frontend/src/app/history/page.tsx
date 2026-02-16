@@ -48,7 +48,7 @@ export default function IntelligenceArchive() {
 
     return (
         <div className="h-screen flex flex-col">
-            {/* Header */}
+
             <div className="h-14 border-b border-border flex items-center px-6 gap-3 shrink-0">
                 <div className="w-8 h-8 rounded-lg bg-mint/10 flex items-center justify-center">
                     <History className="w-4 h-4 text-mint" />
@@ -65,9 +65,9 @@ export default function IntelligenceArchive() {
             </div>
 
             <div className="flex-1 flex min-h-0">
-                {/* Left: List */}
+
                 <div className="w-full lg:w-[400px] xl:w-[450px] border-r border-border flex flex-col">
-                    {/* Search */}
+
                     <div className="p-4 border-b border-border">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-muted" />
@@ -80,7 +80,7 @@ export default function IntelligenceArchive() {
                         </div>
                     </div>
 
-                    {/* List */}
+
                     <ScrollArea className="flex-1">
                         <div className="p-3 space-y-2">
                             {isLoading && (
@@ -123,8 +123,8 @@ export default function IntelligenceArchive() {
                                             <button
                                                 onClick={() => setSelectedId(item.id)}
                                                 className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 ${selectedId === item.id
-                                                        ? "bg-mint/10 border border-mint/20 shadow-glow"
-                                                        : "hover:bg-surface-light/50 border border-transparent"
+                                                    ? "bg-mint/10 border border-mint/20 shadow-glow"
+                                                    : "hover:bg-surface-light/50 border border-transparent"
                                                     }`}
                                             >
                                                 <div className="flex items-start justify-between gap-2 mb-1.5">
@@ -153,7 +153,7 @@ export default function IntelligenceArchive() {
                     </ScrollArea>
                 </div>
 
-                {/* Right: Detail */}
+
                 <div className="hidden lg:flex flex-1 flex-col min-w-0">
                     {selectedItem ? (
                         <>

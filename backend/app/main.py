@@ -15,14 +15,12 @@ _start_time = datetime.now(timezone.utc)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Modern lifespan handler — replaces deprecated @app.on_event."""
     init_db()
     yield
 
 
 app = FastAPI(title=settings.PROJECT_NAME, lifespan=lifespan)
 
-# CORS — Restrict to known frontend origins
 _allowed_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -41,13 +39,11 @@ app.add_middleware(
 
 @app.get("/health")
 def health_check():
-    """Quick health probe for Docker/CI."""
     return {"status": "active", "version": "1.0.0"}
 
 
 @app.get("/api/v1/status")
 def system_status():
-    """Detailed system status — consumed by the frontend Settings page."""
     from app.services.rag_service import rag_service
 
     uptime_seconds = (datetime.now(timezone.utc) - _start_time).total_seconds()
@@ -62,7 +58,6 @@ def system_status():
         {"name": "Aggregator", "role": "Report Synthesis", "status": "active"},
     ]
 
-    # Check DB connectivity
     db_ok = True
     try:
         from app.db.session import engine

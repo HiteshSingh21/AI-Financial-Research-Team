@@ -1,6 +1,5 @@
 from app.db.session import get_session
 
-# Dependency for FastAPI routes
 def get_db():
     session = next(get_session())
     try:

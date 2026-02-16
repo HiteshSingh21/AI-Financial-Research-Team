@@ -1,7 +1,3 @@
-"""
-The Aggregator Agent — Synthesis Engine.
-Uses Agno framework to synthesize reports from other agents.
-"""
 from agno.agent import Agent
 from agno.models.google import Gemini
 from app.core.config import settings

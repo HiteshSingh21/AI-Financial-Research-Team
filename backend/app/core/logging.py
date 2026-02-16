@@ -1,6 +1,3 @@
-"""
-Centralized logging configuration.
-"""
 import logging
 import sys
 

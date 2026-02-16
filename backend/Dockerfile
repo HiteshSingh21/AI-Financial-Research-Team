@@ -10,13 +10,11 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Create a non-root user
 RUN addgroup --system --gid 1001 appuser && \
     adduser --system --uid 1001 --gid 1001 appuser
 
 COPY . .
 
-# Create data directory and set permissions
 RUN mkdir -p /app/data && chown -R appuser:appuser /app
 
 USER appuser

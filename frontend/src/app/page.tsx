@@ -64,7 +64,7 @@ export default function CommandCenter() {
         scrollToBottom();
     }, [messages, scrollToBottom]);
 
-    // Simulated step progression during loading
+
     useEffect(() => {
         if (!analyzeMutation.isPending) {
             setCurrentStep(0);
@@ -106,7 +106,7 @@ export default function CommandCenter() {
             const errorMsg: Message = {
                 id: (Date.now() + 1).toString(),
                 role: "assistant",
-                content: "⚠️ An error occurred while analyzing. Please check your backend connection and try again.",
+                content: "An error occurred while analyzing. Please check your backend connection and try again.",
                 timestamp: new Date(),
             };
             setMessages((prev) => [...prev, errorMsg]);
@@ -130,9 +130,9 @@ export default function CommandCenter() {
 
     return (
         <div className="h-screen flex">
-            {/* Center: Chat Interface */}
+
             <div className="flex-1 flex flex-col min-w-0">
-                {/* Header */}
+
                 <div className="h-14 border-b border-border flex items-center px-5 gap-3 shrink-0">
                     <div className="w-8 h-8 rounded-lg bg-mint/10 flex items-center justify-center">
                         <Bot className="w-4 h-4 text-mint" />
@@ -144,7 +144,7 @@ export default function CommandCenter() {
                     <Badge variant="success" className="ml-auto">Online</Badge>
                 </div>
 
-                {/* Messages */}
+
                 <div className="flex-1 overflow-y-auto scrollbar-thin p-5 space-y-4" ref={scrollRef}>
                     {messages.length === 0 && (
                         <motion.div
@@ -196,8 +196,8 @@ export default function CommandCenter() {
                                 )}
                                 <div
                                     className={`max-w-[75%] rounded-xl px-4 py-3 ${msg.role === "user"
-                                            ? "bg-mint/15 border border-mint/20 text-slate-heading"
-                                            : "bg-surface-light border border-border"
+                                        ? "bg-mint/15 border border-mint/20 text-slate-heading"
+                                        : "bg-surface-light border border-border"
                                         }`}
                                 >
                                     {msg.role === "assistant" ? (
@@ -284,7 +284,7 @@ export default function CommandCenter() {
                         ))}
                     </AnimatePresence>
 
-                    {/* Thinking indicator */}
+
                     {analyzeMutation.isPending && (
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
@@ -311,7 +311,7 @@ export default function CommandCenter() {
                     )}
                 </div>
 
-                {/* Input */}
+
                 <div className="border-t border-border p-4 shrink-0">
                     <form onSubmit={handleSubmit} className="flex gap-2 max-w-4xl mx-auto">
                         <Input
@@ -337,14 +337,14 @@ export default function CommandCenter() {
                 </div>
             </div>
 
-            {/* Right: Context Panel */}
+
             <div className="hidden xl:flex w-[300px] flex-col border-l border-border shrink-0">
                 <div className="h-14 border-b border-border flex items-center px-5">
                     <h3 className="text-sm font-semibold text-slate-heading">Live Intelligence</h3>
                 </div>
                 <ScrollArea className="flex-1">
                     <div className="p-4 space-y-4">
-                        {/* Agent Status */}
+
                         <div className="space-y-3">
                             <h4 className="text-xs font-semibold text-slate-muted uppercase tracking-wider">Agent Pipeline</h4>
                             {agentSteps.map((step, i) => {
@@ -355,10 +355,10 @@ export default function CommandCenter() {
                                     <motion.div
                                         key={i}
                                         className={`flex items-center gap-3 p-2.5 rounded-lg transition-all duration-300 ${isActive
-                                                ? "bg-surface-light border border-mint/20 shadow-glow"
-                                                : isDone
-                                                    ? "bg-surface-light/30 border border-border opacity-60"
-                                                    : "opacity-30"
+                                            ? "bg-surface-light border border-mint/20 shadow-glow"
+                                            : isDone
+                                                ? "bg-surface-light/30 border border-border opacity-60"
+                                                : "opacity-30"
                                             }`}
                                         animate={isActive ? { scale: [1, 1.01, 1] } : {}}
                                         transition={{ repeat: Infinity, duration: 2 }}
@@ -376,7 +376,7 @@ export default function CommandCenter() {
                             )}
                         </div>
 
-                        {/* Quick Stats */}
+
                         <div className="space-y-3 mt-6">
                             <h4 className="text-xs font-semibold text-slate-muted uppercase tracking-wider">
                                 Analysis Capabilities

@@ -1,14 +1,9 @@
-"""
-The Journalist Agent — Sentiment Analyst.
-Uses Agno framework to wrap SearchTool.
-"""
 from agno.agent import Agent
 from agno.models.google import Gemini
 from app.core.config import settings
 from app.services.search_tool import search_tool_service
 
 def search_news(query: str, max_results: int = 5) -> list[dict]:
-    """Search for recent news articles."""
     return search_tool_service.search_news(query, max_results)
 
 sentiment_analyst = Agent(
