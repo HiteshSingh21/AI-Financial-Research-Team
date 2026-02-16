@@ -3,7 +3,6 @@ Finance API Service — Live market data + technical indicators.
 Uses yfinance for data and `ta` library for RSI, SMA, MACD.
 """
 import yfinance as yf
-import pandas as pd
 from ta.momentum import RSIIndicator
 from ta.trend import SMAIndicator, EMAIndicator, MACD
 from app.core.logging import get_logger

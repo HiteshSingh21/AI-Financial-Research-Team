@@ -30,6 +30,33 @@ export interface ChatHistoryItem {
     timestamp: string;
 }
 
+export interface AgentStatus {
+    name: string;
+    role: string;
+    status: string;
+}
+
+export interface SystemStatus {
+    status: string;
+    version: string;
+    uptime: string;
+    uptime_seconds: number;
+    agents: AgentStatus[];
+    rag: {
+        ready: boolean;
+        total_chunks: number;
+    };
+    database: {
+        connected: boolean;
+        url_scheme: string;
+    };
+    api_keys: {
+        gemini: boolean;
+        tavily: boolean;
+    };
+    model: string;
+}
+
 export async function analyzeStock(
     query: string,
     userId: string
@@ -55,3 +82,9 @@ export async function getHistory(userId: string): Promise<ChatHistoryItem[]> {
     );
     return data;
 }
+
+export async function getSystemStatus(): Promise<SystemStatus> {
+    const { data } = await api.get<SystemStatus>("/api/v1/status");
+    return data;
+}
+

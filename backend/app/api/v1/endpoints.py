@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.api.dependencies import get_db
 from app.agents.supervisor import supervisor_agent
 from app.services.rag_service import rag_service
-from app.db.models import ChatHistory, AnalysisReport
+from app.db.models import ChatHistory
 import shutil
 import os
 from app.core.config import settings

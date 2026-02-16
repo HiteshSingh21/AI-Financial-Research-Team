@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { analyzeStock, ingestDocument, getHistory } from "./api";
-import type { AnalyzeResponse, IngestResponse, ChatHistoryItem } from "./api";
+import { analyzeStock, ingestDocument, getHistory, getSystemStatus } from "./api";
+import type { AnalyzeResponse, IngestResponse, ChatHistoryItem, SystemStatus } from "./api";
 
 export function useAnalyze() {
     const queryClient = useQueryClient();
@@ -26,3 +26,13 @@ export function useHistory(userId: string) {
         staleTime: 30_000,
     });
 }
+
+export function useSystemStatus() {
+    return useQuery<SystemStatus, Error>({
+        queryKey: ["system-status"],
+        queryFn: () => getSystemStatus(),
+        refetchInterval: 10_000,
+        staleTime: 5_000,
+    });
+}
+

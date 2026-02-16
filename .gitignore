@@ -41,4 +41,7 @@ data/raw_pdfs/*
 data/faiss_index/*
 !data/faiss_index/.keep
 verify_agents.py
+verify_services.py
+inspect_agno*.py
+ingest_data.py
 backend/financial_analyst.db
