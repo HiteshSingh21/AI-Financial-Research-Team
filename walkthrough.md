@@ -20,10 +20,11 @@ graph TB
     subgraph Backend ["Backend (FastAPI)"]
         API["REST API<br/>/api/v1/*"]
         SUP["Supervisor Agent"]
-        LIB["Librarian Agent<br/>(RAG/FAISS)"]
-        QNT["Quant Agent<br/>(yfinance + ta)"]
+        LIB["Librarian Agent<br/>(MCP Tools)"]
+        QNT["Quant Agent<br/>(MCP Tools)"]
         JRN["Journalist Agent<br/>(DuckDuckGo/Tavily)"]
         AGG["Aggregator Agent<br/>(Report Synthesis)"]
+        MCP["MCP Server Layer<br/>(Strict Schema Validation)"]
     end
 
     subgraph Data ["Data Layer"]
@@ -41,9 +42,11 @@ graph TB
     SUP --> QNT
     SUP --> JRN
     SUP --> AGG
-    LIB --> FAISS
+    LIB --> MCP
+    QNT --> MCP
+    MCP --> FAISS
     FAISS --> PDF
-    QNT -.-> |"yfinance API"| QNT
+    MCP -.-> |"yfinance API"| MCP
     JRN -.-> |"Web Search"| JRN
     API --> DB
 ```
@@ -393,5 +396,29 @@ Made the Settings page live by integrating the `/api/v1/status` endpoint with re
 | **HTTP Client** | Axios |
 | **Database** | SQLite (dev) / PostgreSQL 15 (prod) |
 | **Containers** | Docker, Docker Compose |
-| **CI/CD** | GitHub Actions (3-job pipeline) |
 | **Testing** | Pytest (backend), ruff (lint), ESLint + tsc (frontend) |
+
+---
+
+## Technical Appendix: MCP Architecture Validation
+
+In **Phase 4**, we implemented the Model Context Protocol (MCP) using `FastMCP`. To prevent agents (like the Quant agent) from hallucinating formatting details—specifically sending tickers like `$NVDA` instead of `NVDA`—we defined a strict JSON schema for the MCP inputs using Pydantic:
+
+```python
+TickerStr = Annotated[
+    str,
+    Field(
+        pattern=r"^[^$]*$",
+        description="The stock ticker symbol (e.g., AAPL). MUST NOT contain $."
+    )
+]
+```
+
+When tested with an invalid input through the MCP client directly, the server acts as an impenetrable validation layer and returns a unified JSONRPC error before the tool is ever executed:
+
+```
+Result is_error: True
+Result content: [TextContent(type='text', text='Error: ValidationError: 1 validation error for get_company_info\nticker\n  String should match pattern \'^[^$]*$\'
+```
+
+This ensures our underlying functions, wrappers, and third party APIs remain safe from LLM-generated malformed arguments, significantly increasing the reliability of the research team.

@@ -1,16 +1,20 @@
 from agno.agent import Agent
 from agno.models.google import Gemini
+from agno.tools.mcp import MCPTools
+from mcp.client.stdio import StdioServerParameters
 from app.core.config import settings
-from app.services.rag_service import rag_service
+import sys
+import os
 
-def search_documents(query: str, top_k: int = 5) -> list[dict]:
-    return rag_service.query(query, top_k)
+mcp_server_cmd = sys.executable
+mcp_server_args = [os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "mcp_financial_server.py")]
+mcp_tools = MCPTools(url=settings.MCP_SERVER_URI) if settings.MCP_SERVER_URI else MCPTools(server_params=StdioServerParameters(command=mcp_server_cmd, args=mcp_server_args))
 
 fundamental_analyst = Agent(
     name="Librarian Agent",
     role="Fundamental Analyst",
     model=Gemini(id=settings.GEMINI_MODEL),
-    tools=[search_documents],
+    tools=[mcp_tools],
     instructions=[
         "You are a Fundamental Analyst.",
         "Use `search_documents` to find facts in internal files (10-K, 10-Q).",

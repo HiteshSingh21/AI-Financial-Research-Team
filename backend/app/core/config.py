@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     GEMINI_MODEL: str = "gemini-1.5-flash"
     GEMINI_EMBEDDING_MODEL: str = "models/embedding-001"
 
+    MCP_SERVER_URI: Optional[str] = None
+
     class Config:
         env_file = ".env"
         extra = "ignore"

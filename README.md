@@ -26,9 +26,14 @@
 │    ┌────┼──────────────┐                        │           │
 │    ▼         ▼              ▼                   ▼           │
 │ Librarian   Quant       Journalist         Aggregator       │
-│ (RAG/FAISS) (yfinance)  (DuckDuckGo)      (Synthesis)       │
-│                                                             │
-│  Services: finance_api · rag_service · search_tool          │
+│ (MCP)      (MCP)        (DuckDuckGo)      (Synthesis)       │
+│   │         │                                               │
+│   ▼         ▼                                               │
+│ ┌───────────────┐                                           │
+│ │ FastMCP Server│  <-- Strict JSON Schema Validation        │
+│ └──────┬────────┘                                           │
+│        ▼                                                    │
+│ Services: finance_api · rag_service · search_tool           │
 └─────────────────────────┬───────────────────────────────────┘
                           │
                 ┌─────────▼───────────┐
@@ -352,6 +357,7 @@ npm run build
 |-------|-----------|
 | **LLM** | Google Gemini 1.5 Flash via [Agno](https://github.com/agno-agi/agno) framework |
 | **Backend** | FastAPI, Python 3.11, SQLModel, Pydantic Settings |
+| **Tool Execution** | Model Context Protocol (FastMCP) for standardized secure tool calling |
 | **Finance Data** | yfinance, ta (Technical Analysis library) |
 | **RAG Pipeline** | PyPDF2 → Text Chunking → Gemini Embeddings → FAISS |
 | **Web Search** | Tavily (premium) / DuckDuckGo (free fallback) |

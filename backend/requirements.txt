@@ -9,6 +9,7 @@ python-multipart
 google-generativeai
 google-genai
 agno
+mcp
 
 yfinance
 pandas

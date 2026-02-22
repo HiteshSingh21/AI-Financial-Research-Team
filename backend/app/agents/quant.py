@@ -1,22 +1,20 @@
 from agno.agent import Agent
 from agno.models.google import Gemini
+from agno.tools.mcp import MCPTools
+from mcp.client.stdio import StdioServerParameters
 from app.core.config import settings
-from app.services.finance_api import finance_api_service
+import sys
+import os
 
-def get_stock_data(ticker: str, period: str = "6mo") -> dict:
-    return finance_api_service.get_stock_data(ticker, period)
-
-def get_company_info(ticker: str) -> dict:
-    return finance_api_service.get_company_info(ticker)
-
-def calculate_technical_indicators(ticker: str, period: str = "6mo") -> dict:
-    return finance_api_service.calculate_technical_indicators(ticker, period)
+mcp_server_cmd = sys.executable
+mcp_server_args = [os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "mcp_financial_server.py")]
+mcp_tools = MCPTools(url=settings.MCP_SERVER_URI) if settings.MCP_SERVER_URI else MCPTools(server_params=StdioServerParameters(command=mcp_server_cmd, args=mcp_server_args))
 
 technical_analyst = Agent(
     name="Quant Agent",
     role="Technical Analyst",
     model=Gemini(id=settings.GEMINI_MODEL),
-    tools=[get_stock_data, get_company_info, calculate_technical_indicators],
+    tools=[mcp_tools],
     instructions=[
         "You are a Technical Analyst.",
         "Use `get_stock_data` to check price history.",
