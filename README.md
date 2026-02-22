@@ -1,4 +1,4 @@
-# 🤖 AI Financial Research Team
+#  AI Financial Research Team
 
 > **An AI-powered financial analysis platform** built with a multi-agent research team.
 > Ask about any stock and receive a comprehensive investment report covering technical indicators, fundamental analysis from SEC filings, and real-time news sentiment — all synthesized into a single Buy/Sell/Hold verdict.
@@ -10,7 +10,7 @@
 
 ---
 
-## 📐 Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -45,9 +45,9 @@
 
 1. You type a query like **"Analyze NVDA stock"** in the chat interface.
 2. The **Supervisor Agent** receives the request and delegates to specialists:
-   - 📚 **Librarian** — Searches your uploaded SEC filings (10-K, 10-Q) using RAG (FAISS + Gemini Embeddings)
-   - 📊 **Quant** — Fetches live price data from Yahoo Finance, computes RSI, MACD, SMA, EMA
-   - 📰 **Journalist** — Scans the web for recent news headlines and determines market sentiment
+   -  **Librarian** — Searches your uploaded SEC filings (10-K, 10-Q) using RAG (FAISS + Gemini Embeddings)
+   -  **Quant** — Fetches live price data from Yahoo Finance, computes RSI, MACD, SMA, EMA
+   -  **Journalist** — Scans the web for recent news headlines and determines market sentiment
 3. The **Aggregator** receives all findings and synthesizes a final Investment Report with a **Buy/Sell/Hold** verdict.
 4. The report is saved to the database and displayed in the chat with Markdown rendering.
 
@@ -63,7 +63,7 @@
 
 ---
 
-## �️ Features
+##  Features
 
 - **Multi-Agent Analysis** — 5 AI agents collaborate to produce comprehensive investment reports
 - **RAG Pipeline** — Upload PDF filings, auto-chunk, embed with Gemini, index with FAISS for semantic search
@@ -77,7 +77,7 @@
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -184,17 +184,17 @@ To stop and remove data: `docker compose down -v`
 
 ---
 
-## 🔧 Environment Variables
+##  Environment Variables
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `GEMINI_API_KEY` | ✅ Yes | — | Google Gemini API key ([get one here](https://aistudio.google.com/apikey)) |
-| `TAVILY_API_KEY` | ❌ No | — | Tavily search API key (falls back to DuckDuckGo if not set) |
-| `DATABASE_URL` | ❌ No | `sqlite:///./financial_analyst.db` | Database connection string |
-| `POSTGRES_USER` | ❌ No | `financial_ai` | Docker Postgres username |
-| `POSTGRES_PASSWORD` | ❌ No | `financial_ai_pass` | Docker Postgres password |
-| `GEMINI_MODEL` | ❌ No | `gemini-1.5-flash` | Which Gemini model to use |
-| `FRONTEND_URL` | ❌ No | `http://localhost:3000` | Frontend URL for CORS (production) |
+| `GEMINI_API_KEY` |  Yes | — | Google Gemini API key ([get one here](https://aistudio.google.com/apikey)) |
+| `TAVILY_API_KEY` |  No | — | Tavily search API key (falls back to DuckDuckGo if not set) |
+| `DATABASE_URL` |  No | `sqlite:///./financial_analyst.db` | Database connection string |
+| `POSTGRES_USER` | No | `financial_ai` | Docker Postgres username |
+| `POSTGRES_PASSWORD` | No | `financial_ai_pass` | Docker Postgres password |
+| `GEMINI_MODEL` |  No | `gemini-1.5-flash` | Which Gemini model to use |
+| `FRONTEND_URL` |  No | `http://localhost:3000` | Frontend URL for CORS (production) |
 
 ---
 
@@ -210,7 +210,7 @@ To stop and remove data: `docker compose down -v`
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 AI-Financial-Research-Team/
@@ -315,7 +315,7 @@ AI-Financial-Research-Team/
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Backend Tests (15 tests)
 
@@ -351,7 +351,7 @@ npm run build
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -371,6 +371,6 @@ npm run build
 
 ---
 
-## 📄 License
+##  License
 
 MIT License. See [LICENSE](LICENSE) for details.
